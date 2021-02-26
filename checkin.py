@@ -3,8 +3,6 @@ import re
 import os
 
 requests.packages.urllib3.disable_warnings()
-
-
 class SspanelQd(object):
     def __init__(self):
         # 机场地址
