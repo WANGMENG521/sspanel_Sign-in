@@ -7,6 +7,10 @@
 
 进入自己fork的仓库，点击 Settings-> Secrets-> New Secrets 添加以下5个Secrets。
 
+
+
+
+
 WEB     签到机场网址,多个网址用英文逗号分割。
 
 USER    签到机场登陆邮箱,与网站对应,多个用户用英文逗号分割。
