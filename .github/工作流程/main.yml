@@ -1,0 +1,50 @@
+＃此工作流程将安装Python依赖项，运行测试和使用单个Python版本的lint
+＃有关更多信息，请参见：https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+名称：签到
+
+于：
+  推送：
+    分支机构：[主管]
+  pull_request：
+    分支机构：[主管]
+  时间表：
+    - cron的：00 18 * * *
+  观看：
+    类型：开始
+职位：
+  建立：
+
+    运行：ubuntu-latest
+    如果：github.event.repository.owner.id == github.event.sender.id
+
+    步骤：
+    -用途：actions / checkout @ v2
+    -名称：设置Python 3.7
+      用途：actions / setup-python @ v2
+      与：
+        python版本：3.7
+    -名称：运行
+      env：
+        网路：$ {{secrets.WEB}}
+        用户：$ {{secrets.USER}}
+        pwd：$ {{secrets.PWD}}
+        sckey：$ {{ secrets.SCKEY }}
+        ktkey：$ {{ secrets.KTKEY }}
+      运行：|
+        点安装-r requirements.txt
+        python3 checkin.py
+
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: Run a one-line script
+        run: echo Hello, world!
+
+      # Runs a set of commands using the runners shell
+      - name: Run a multi-line script
+        run: |
+          echo Add other actions to build,
+          echo test, and deploy your project.
