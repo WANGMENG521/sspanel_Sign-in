@@ -1,0 +1,36 @@
+# This workflow will install Python dependencies, run tests and lint with a single version of Python
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-python-with-github-actions
+
+name: 签到
+
+on:
+  push:
+    branches: [ master ]
+  pull_request:
+    branches: [ master ]
+  schedule:
+    - cron: 00 18 * * *
+  watch:
+    types: started
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    if: github.event.repository.owner.id == github.event.sender.id
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python 3.7
+      uses: actions/setup-python@v2
+      with:
+        python-version: 3.7
+    - name: Run
+      env:
+        web: ${{ secrets.WEB }}
+        user: ${{ secrets.USER }}
+        pwd: ${{ secrets.PWD }}
+        sckey: ${{ secrets.SCKEY }}
+        ktkey: ${{ secrets.KTKEY }}
+      run: |
+        pip install -r requirements.txt
+        python3 checkin.py
